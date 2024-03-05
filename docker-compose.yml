@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  vue3:
+    container_name: vue3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vue3_node_20.11.1
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5173:5173"
