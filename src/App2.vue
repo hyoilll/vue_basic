@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const dynamicId = ref<string | undefined>('hello')
+const isButton = ref<boolean>(false)
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const dynamicId = ref<string | undefined>('hello')
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div :id="dynamicId">hahahaha</div>
+      <button :disabled="isButton">Button</button>
       <HelloWorld msg="You did it!" />
 
       <nav>
@@ -27,10 +27,6 @@ const dynamicId = ref<string | undefined>('hello')
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-#hello {
-  color: red;
 }
 
 .logo {
