@@ -3,11 +3,7 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const number = ref<number>(2)
-
-function getString(msg: string): string {
-  return msg
-}
+const isSeen = ref<boolean>(true)
 </script>
 
 <template>
@@ -15,9 +11,8 @@ function getString(msg: string): string {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div :id="`list-${number}`">hahaha</div>
-      <div>{{ getString('hello world!!') }}</div>
-      <div :id="getString('hello')">hello vue</div>
+      <div v-if="isSeen">v-if</div>
+      <div v-else>else</div>
 
       <HelloWorld msg="You did it!" />
 
@@ -34,10 +29,6 @@ function getString(msg: string): string {
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-#hello {
-  color: red;
 }
 
 .logo {
