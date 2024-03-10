@@ -3,7 +3,10 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const isButton = ref<boolean>(false)
+const objectOfAttrs = ref<object>({
+  id: 'helloId',
+  class: 'helloClass'
+})
 </script>
 
 <template>
@@ -11,7 +14,7 @@ const isButton = ref<boolean>(false)
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <button :disabled="isButton">Button</button>
+      <div v-bind="objectOfAttrs">hahaha</div>
       <HelloWorld msg="You did it!" />
 
       <nav>
@@ -27,6 +30,13 @@ const isButton = ref<boolean>(false)
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+#helloId {
+  color: red;
+}
+.helloClass {
+  color: blue;
 }
 
 .logo {
