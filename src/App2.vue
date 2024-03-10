@@ -3,7 +3,19 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const isSeen = ref<boolean>(true)
+// 動的引数は基本的に大文字は使用しない方が望ましいけど、単一ファイル（.vue）を使用すると
+// vueコンパイラーが解釈してくれるため、大文字を認識できない問題が引き起こされない。
+const isIdOrClass = ref<string>('id')
+
+function setBtn() {
+  if (isIdOrClass.value === 'id') {
+    isIdOrClass.value = 'class'
+  } else {
+    isIdOrClass.value = 'id'
+  }
+}
+
+const propsName = ref<string>('hello')
 </script>
 
 <template>
@@ -11,8 +23,8 @@ const isSeen = ref<boolean>(true)
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div v-if="isSeen">v-if</div>
-      <div v-else>else</div>
+      <div :[isIdOrClass]="propsName">hello world!!</div>
+      <button @click="setBtn">change Text Color</button>
 
       <HelloWorld msg="You did it!" />
 
@@ -29,6 +41,14 @@ const isSeen = ref<boolean>(true)
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+#hello {
+  color: red;
+}
+
+.hello {
+  color: blue;
 }
 
 .logo {
