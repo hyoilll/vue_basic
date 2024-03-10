@@ -3,10 +3,11 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const objectOfAttrs = ref<object>({
-  id: 'helloId',
-  class: 'helloClass'
-})
+const number = ref<number>(2)
+
+function getString(msg: string): string {
+  return msg
+}
 </script>
 
 <template>
@@ -14,7 +15,10 @@ const objectOfAttrs = ref<object>({
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div v-bind="objectOfAttrs">hahaha</div>
+      <div :id="`list-${number}`">hahaha</div>
+      <div>{{ getString('hello world!!') }}</div>
+      <div :id="getString('hello')">hello vue</div>
+
       <HelloWorld msg="You did it!" />
 
       <nav>
@@ -32,11 +36,8 @@ header {
   max-height: 100vh;
 }
 
-#helloId {
+#hello {
   color: red;
-}
-.helloClass {
-  color: blue;
 }
 
 .logo {
