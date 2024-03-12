@@ -3,19 +3,19 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-// 動的引数は基本的に大文字は使用しない方が望ましいけど、単一ファイル（.vue）を使用すると
-// vueコンパイラーが解釈してくれるため、大文字を認識できない問題が引き起こされない。
-const isIdOrClass = ref<string>('id')
+/**
+ * <script setup> で宣言されたトップレベルのインポート、変数、関数は、同じコンポーネントのテンプレートで自動的に使用可能になります。
+ * テンプレートは同じスコープで宣言された JavaScript の関数と同じだと考えれば、当然ながら、一緒に宣言されたすべてのものにアクセスできます。
+ */
+const cnt = ref<number>(0)
+const bindNa = ref<string>('hello')
 
-function setBtn() {
-  if (isIdOrClass.value === 'id') {
-    isIdOrClass.value = 'class'
-  } else {
-    isIdOrClass.value = 'id'
-  }
+const increment = (): void => {
+  cnt.value += 1
 }
-
-const propsName = ref<string>('hello')
+const decrement = (): void => {
+  cnt.value -= 1
+}
 </script>
 
 <template>
@@ -23,8 +23,9 @@ const propsName = ref<string>('hello')
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div :[isIdOrClass]="propsName">hello world!!</div>
-      <button @click="setBtn">change Text Color</button>
+      <div :class="bindNa">{{ cnt }}</div>
+      <button class="increBtn" @click="increment">increment</button>
+      <button @click="decrement">decrement</button>
 
       <HelloWorld msg="You did it!" />
 
@@ -43,12 +44,13 @@ header {
   max-height: 100vh;
 }
 
-#hello {
+.hello {
   color: red;
+  font-size: 40px;
 }
 
-.hello {
-  color: blue;
+.increBtn {
+  margin-right: 20px;
 }
 
 .logo {
