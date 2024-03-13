@@ -3,17 +3,17 @@ import { ref, reactive } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const state = reactive({
-  count: 0
-})
+const cnt = ref(0)
+const obj = { id: ref(1) }
+const { id } = obj
 
 const bindNa = ref('hello')
 
-const increment = (cnt: number): void => {
-  cnt += 1
+const increment = (): void => {
+  cnt.value += 1
 }
-const decrement = (cnt: number): void => {
-  cnt -= 1
+const decrement = (): void => {
+  cnt.value -= 1
 }
 </script>
 
@@ -22,10 +22,9 @@ const decrement = (cnt: number): void => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <!-- 以下のbtnをクリックしても切り離された普通のローカル変数になったため、state.countの値は変わらない-->
-      <div :class="bindNa">{{ state.count }}</div>
-      <button class="increBtn" @click="increment(state.count)">increment</button>
-      <button @click="decrement(state.count)">decrement</button>
+      <div :class="bindNa">{{ id + 1 }}</div>
+      <button class="increBtn" @click="increment">increment</button>
+      <button @click="decrement">decrement</button>
 
       <HelloWorld msg="You did it!" />
 
