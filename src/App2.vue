@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-/**
- * <script setup> で宣言されたトップレベルのインポート、変数、関数は、同じコンポーネントのテンプレートで自動的に使用可能になります。
- * テンプレートは同じスコープで宣言された JavaScript の関数と同じだと考えれば、当然ながら、一緒に宣言されたすべてのものにアクセスできます。
- */
-const cnt = ref<number>(0)
-const bindNa = ref<string>('hello')
+const state = reactive({
+  count: 0
+})
 
-const increment = (): void => {
-  cnt.value += 1
+const bindNa = ref('hello')
+
+const increment = (cnt: number): void => {
+  cnt += 1
 }
-const decrement = (): void => {
-  cnt.value -= 1
+const decrement = (cnt: number): void => {
+  cnt -= 1
 }
 </script>
 
@@ -23,9 +22,10 @@ const decrement = (): void => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div :class="bindNa">{{ cnt }}</div>
-      <button class="increBtn" @click="increment">increment</button>
-      <button @click="decrement">decrement</button>
+      <!-- 以下のbtnをクリックしても切り離された普通のローカル変数になったため、state.countの値は変わらない-->
+      <div :class="bindNa">{{ state.count }}</div>
+      <button class="increBtn" @click="increment(state.count)">increment</button>
+      <button @click="decrement(state.count)">decrement</button>
 
       <HelloWorld msg="You did it!" />
 
