@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const cnt = ref(0)
-const obj = { id: ref(1) }
-const { id } = obj
+const author = reactive({
+  name: 'hyoil',
+  books: [['Vue 2 - hello', 'Vue 3 - world', 'Vue 4 - Vue']]
+})
 
-const bindNa = ref('hello')
-
-const increment = (): void => {
-  cnt.value += 1
-}
-const decrement = (): void => {
-  cnt.value -= 1
-}
+/**
+ * 算出プロパティが依存するリアクティブなデータ（この例ではauthor.books）の変更を追跡
+ * 依存するデータに変更があった場合に限り、算出プロパティの関数を再評価
+ * 関連するデータが変わらない限り、算出プロパティの結果はキャッシュされ、再計算されることはない
+ * @return 返り値は 算出された ref
+ */
+const publishedBooksMessage = computed(() => {
+  return author.books.length > 0 ? 'yes' : 'no'
+})
 </script>
 
 <template>
@@ -22,9 +24,7 @@ const decrement = (): void => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div :class="bindNa">{{ id + 1 }}</div>
-      <button class="increBtn" @click="increment">increment</button>
-      <button @click="decrement">decrement</button>
+      <div class="hello">{{ publishedBooksMessage }}</div>
 
       <HelloWorld msg="You did it!" />
 
