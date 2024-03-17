@@ -3,19 +3,14 @@ import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-// binding of object
-const objStyle = reactive({
-  color: 'blue',
-  fontSize: '50px'
-})
+// if else
+const isTrue = ref(true)
+const changeValue = (): void => {
+  isTrue.value = !isTrue.value
+}
 
-// binding of object in array
-const colorStyle = reactive({
-  color: 'red'
-})
-const fontSizeStyle = reactive({
-  fontSize: '50px'
-})
+// if elseif else
+const inputRef = ref('')
 </script>
 
 <template>
@@ -23,11 +18,17 @@ const fontSizeStyle = reactive({
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <!-- binding of object -->
-      <div :style="objStyle">hello world object</div>
+      <!-- if else -->
+      <div v-if="isTrue">hello world true</div>
+      <div v-else>hello world false</div>
+      <input @click="changeValue" type="button" value="changeValue" />
 
-      <!-- binding of array -->
-      <div :style="[colorStyle, fontSizeStyle]">hello world array</div>
+      <!-- if elseif else -->
+      <div v-if="inputRef === 'A'">type A</div>
+      <div v-else-if="inputRef === 'B'">type B</div>
+      <div v-else-if="inputRef === 'C'">type C</div>
+      <div v-else>type else</div>
+      <input v-model="inputRef" type="text" />
 
       <HelloWorld msg="You did it!" />
 
