@@ -3,14 +3,7 @@ import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-// if else
-const isTrue = ref(true)
-const changeValue = (): void => {
-  isTrue.value = !isTrue.value
-}
-
-// if elseif else
-const inputRef = ref('')
+const value = ref('A')
 </script>
 
 <template>
@@ -18,18 +11,10 @@ const inputRef = ref('')
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <!-- if else -->
-      <div v-if="isTrue">hello world true</div>
-      <div v-else>hello world false</div>
-      <input @click="changeValue" type="button" value="changeValue" />
-
-      <!-- if elseif else -->
-      <div v-if="inputRef === 'A'">type A</div>
-      <div v-else-if="inputRef === 'B'">type B</div>
-      <div v-else-if="inputRef === 'C'">type C</div>
-      <div v-else>type else</div>
-      <input v-model="inputRef" type="text" />
-
+      <template v-if="value === 'B'">
+        <div>hello world1</div>
+        <div>hello world2</div>
+      </template>
       <HelloWorld msg="You did it!" />
 
       <nav>
