@@ -3,7 +3,14 @@ import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const value = ref('A')
+const isTrue = ref(true)
+const isShow = ref(true)
+const changeValueIf = (): void => {
+  isTrue.value = !isTrue.value
+}
+const changeValueShow = (): void => {
+  isShow.value = !isShow.value
+}
 </script>
 
 <template>
@@ -11,10 +18,17 @@ const value = ref('A')
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <template v-if="value === 'B'">
-        <div>hello world1</div>
-        <div>hello world2</div>
-      </template>
+      <!-- v-if v-else -->
+      <!-- false要素はDOMから完全に削除される -->
+      <div v-if="isTrue">hello world True</div>
+      <div v-else>hello world false</div>
+      <input @click="changeValueIf" type="button" value="changeValueIf" />
+
+      <!-- v-show -->
+      <!-- false要素はcssにdisplay noneが適用されてDOMに残っている -->
+      <div v-show="isShow">hello world isShow</div>
+      <input @click="changeValueShow" type="button" value="changeValueShow" />
+
       <HelloWorld msg="You did it!" />
 
       <nav>
