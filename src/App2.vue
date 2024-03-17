@@ -3,29 +3,25 @@ import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const firstName = ref('Lee')
-const lastName = ref('hyoil')
+const isActive = ref(true)
+const hasError = ref(false)
 
-const fullName = computed({
-  get(): string {
-    return firstName.value + ' ' + lastName.value
-  },
-  set(newValue: string): void {
-    ;[firstName.value, lastName.value] = newValue.split(' ')
-  }
+// obj
+const objClass = reactive({
+  active: isActive,
+  error: hasError
 })
 
-const inputRef = ref('')
-
-// 1. watchを使ったcomputed setterの使い方
-// watch(inputRef, (inputValue: string) => {
-//   fullName.value = inputValue
-// })
-
-// 2. btn submitを使ったcomputed setterの使い方
-const updateName = (): void => {
-  fullName.value = inputRef.value
+const changeActive = (): void => {
+  isActive.value = !isActive.value
 }
+const changeError = (): void => {
+  hasError.value = !hasError.value
+}
+
+// arr
+const arrClass1 = ref('hello')
+const arrClass2 = ref('world')
 </script>
 
 <template>
@@ -33,9 +29,18 @@ const updateName = (): void => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <input v-model="inputRef" type="text" />
-      <div class="hello">{{ fullName }}</div>
-      <input @click="updateName" type="button" value="updateName" />
+      <!-- obj -->
+      <div class="defaultObjClass" :class="objClass">hello world Object</div>
+      <input @click="changeActive" type="button" value="changeActive" />
+      <input @click="changeError" type="button" value="changeError" />
+
+      <!-- arr -->
+      <div class="defaultArrClass" :class="[arrClass1, arrClass2]">hello world Array</div>
+
+      <!-- obj + arr -->
+      <div class="defalutObjArrClass" :class="[objClass, arrClass1, arrClass2]">
+        hello world Object Array
+      </div>
 
       <HelloWorld msg="You did it!" />
 
@@ -52,11 +57,6 @@ const updateName = (): void => {
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-.hello {
-  color: red;
-  font-size: 40px;
 }
 
 .increBtn {
