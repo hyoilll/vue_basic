@@ -3,25 +3,19 @@ import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const isActive = ref(true)
-const hasError = ref(false)
-
-// obj
-const objClass = reactive({
-  active: isActive,
-  error: hasError
+// binding of object
+const objStyle = reactive({
+  color: 'blue',
+  fontSize: '50px'
 })
 
-const changeActive = (): void => {
-  isActive.value = !isActive.value
-}
-const changeError = (): void => {
-  hasError.value = !hasError.value
-}
-
-// arr
-const arrClass1 = ref('hello')
-const arrClass2 = ref('world')
+// binding of object in array
+const colorStyle = reactive({
+  color: 'red'
+})
+const fontSizeStyle = reactive({
+  fontSize: '50px'
+})
 </script>
 
 <template>
@@ -29,18 +23,11 @@ const arrClass2 = ref('world')
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <!-- obj -->
-      <div class="defaultObjClass" :class="objClass">hello world Object</div>
-      <input @click="changeActive" type="button" value="changeActive" />
-      <input @click="changeError" type="button" value="changeError" />
+      <!-- binding of object -->
+      <div :style="objStyle">hello world object</div>
 
-      <!-- arr -->
-      <div class="defaultArrClass" :class="[arrClass1, arrClass2]">hello world Array</div>
-
-      <!-- obj + arr -->
-      <div class="defalutObjArrClass" :class="[objClass, arrClass1, arrClass2]">
-        hello world Object Array
-      </div>
+      <!-- binding of array -->
+      <div :style="[colorStyle, fontSizeStyle]">hello world array</div>
 
       <HelloWorld msg="You did it!" />
 
