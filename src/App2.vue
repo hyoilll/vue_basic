@@ -1,22 +1,31 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
-const author = reactive({
-  name: 'hyoil',
-  books: [['Vue 2 - hello', 'Vue 3 - world', 'Vue 4 - Vue']]
+const firstName = ref('Lee')
+const lastName = ref('hyoil')
+
+const fullName = computed({
+  get(): string {
+    return firstName.value + ' ' + lastName.value
+  },
+  set(newValue: string): void {
+    ;[firstName.value, lastName.value] = newValue.split(' ')
+  }
 })
 
-/**
- * 算出プロパティが依存するリアクティブなデータ（この例ではauthor.books）の変更を追跡
- * 依存するデータに変更があった場合に限り、算出プロパティの関数を再評価
- * 関連するデータが変わらない限り、算出プロパティの結果はキャッシュされ、再計算されることはない
- * @return 返り値は 算出された ref
- */
-const publishedBooksMessage = computed(() => {
-  return author.books.length > 0 ? 'yes' : 'no'
-})
+const inputRef = ref('')
+
+// 1. watchを使ったcomputed setterの使い方
+// watch(inputRef, (inputValue: string) => {
+//   fullName.value = inputValue
+// })
+
+// 2. btn submitを使ったcomputed setterの使い方
+const updateName = (): void => {
+  fullName.value = inputRef.value
+}
 </script>
 
 <template>
@@ -24,7 +33,9 @@ const publishedBooksMessage = computed(() => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <div class="hello">{{ publishedBooksMessage }}</div>
+      <input v-model="inputRef" type="text" />
+      <div class="hello">{{ fullName }}</div>
+      <input @click="updateName" type="button" value="updateName" />
 
       <HelloWorld msg="You did it!" />
 
