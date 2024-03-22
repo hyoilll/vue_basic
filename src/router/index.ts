@@ -25,6 +25,12 @@ const router = createRouter({
       // name登録
       name: 'practice',
       component: () => import('../views/PracticeView.vue')
+    },
+    {
+      path: '/blog/:id',
+      // name登録
+      name: 'blog',
+      component: () => import('../views/BlogView.vue')
     }
   ]
 })
