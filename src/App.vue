@@ -34,7 +34,8 @@ const toAbout = (): void => {
       <nav>
         <!-- aタグの代わりにRouterLinkを使うことでリンク間移動時にページリロードを防ぐ。 -->
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink :to="'/about'">About</RouterLink>
+        <!-- nameを使う場合には必ず:toにしなければならない -->
+        <RouterLink :to="{ name: 'about' }">About</RouterLink>
         <RouterLink :to="{ path: '/practice', query: { lang: 'ja' }, hash: '#title' }"
           >Practice</RouterLink
         >
