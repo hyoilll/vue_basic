@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,17 @@ const router = createRouter({
       // name登録
       name: 'blog',
       component: () => import('../views/BlogView.vue')
+    },
+    {
+      /**
+       * routeの優先順位
+       * routeの優先順位としては制限が強い方が優先される。
+       * /about/:id VS /about/:id*
+       * 上記の場合には左が優先される。pathの制限が強いため
+       */
+      path: '/:catchAll(.*)*',
+      name: 'NotFound',
+      component: NotFound
     }
   ]
 })
