@@ -27,7 +27,14 @@ const router = createRouter({
       component: () => import('../views/PracticeView.vue')
     },
     {
-      path: '/blog/:id',
+      /**
+       * :idの右側にカッコをつけることで正規表現を使えるようになる。
+       * defaultとして、:id([^/]+)がついてる。/以外の文字全てOKという意味。
+       *  */
+      // path: '/blog/:id(\\d+)',
+      // path: '/blog/:id+',　配列で受け取る
+      // path: '/blog/:id?' idを指定しなくてもコンポーネントを表示する
+      // path: '/blog/:id*' + と　？を合わせる
       // name登録
       name: 'blog',
       component: () => import('../views/BlogView.vue')
