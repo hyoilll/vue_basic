@@ -18,6 +18,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </div>
   </header>
 
+  <!-- routerで登録したコンポーネントがRouterViewを通じてブラウザに表示される。 -->
   <RouterView />
 </template>
 
