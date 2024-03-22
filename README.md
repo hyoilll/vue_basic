@@ -72,3 +72,7 @@ npm run lint
 1. make build
 2. make yarn
 3. make up
+
+### install vue router
+
+- npm install vue-router@4

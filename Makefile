@@ -5,6 +5,9 @@ build: # docker-composeをビルド
 run: # create-vueを通じてvueをインストール
 	docker-compose run $(serviceName) npm init vue@latest
 
+vue: # vue3コンテナー内部にアクセス
+	docker-compose exec $(serviceName) sh
+
 yarn: # install yarn
 	docker-compose run $(serviceName) yarn install
 
