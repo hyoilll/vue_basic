@@ -1,6 +1,27 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+const router = useRouter()
+
+const toAbout = (): void => {
+  // コードからページを移動させる。
+  /**
+   * push vs replace
+   * push: 前のページを履歴の残すので、前のページに戻ることができる。
+   * replace: 前のページを履歴の残さないため、前のページに戻れずに、二つ前のページに戻ることになる。
+   */
+  router.push('/about')
+  // router.replace('/about')
+
+  /**
+   * go
+   * go: 引数に指定した数字分ページを移動する
+   * ex) go(-1): 一つ前のページに移動
+   *     go(3): 三つ先のページに移動
+   */
+  // router.go(3)
+}
 </script>
 
 <template>
@@ -11,10 +32,19 @@ import HelloWorld from './components/HelloWorld.vue'
       <HelloWorld msg="You did it!" />
 
       <nav>
+        <!-- aタグの代わりにRouterLinkを使うことでリンク間移動時にページリロードを防ぐ。 -->
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/practice">Practice</RouterLink>
+        <RouterLink :to="'/about'">About</RouterLink>
+        <RouterLink :to="{ path: '/practice', query: { lang: 'ja' }, hash: '#title' }"
+          >Practice</RouterLink
+        >
       </nav>
+      <!-- scriptに定義する場合 -->
+      <!-- <button @click="toAbout">toAbout</button> -->
+
+      <!-- templateに定義する場合 -->
+      <!-- 以下の$routerはscriptのconst router = useRouter()のrouterと同じObjectになる。 -->
+      <button @click="$router.push('/about')">toAbout</button>
     </div>
   </header>
 
