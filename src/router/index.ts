@@ -15,6 +15,7 @@ const router = createRouter({
       path: '/about',
       // name登録
       name: 'about',
+      alias: ['/temp', '/aaa'], // 別名を指定する。
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -37,6 +38,8 @@ const router = createRouter({
       // path: '/blog/:id?' idを指定しなくてもコンポーネントを表示する
       // path: '/blog/:id*' + と　？を合わせる
       // name登録
+      path: '/blog/:id',
+      alias: '/otherName/:id',
       name: 'blog',
       component: () => import('../views/BlogView.vue')
     },
@@ -49,7 +52,9 @@ const router = createRouter({
        */
       path: '/:catchAll(.*)*',
       name: 'NotFound',
-      component: NotFound
+      redirect: '/'
+      // redirect: {name: 'home'}
+      // component: NotFound redirectされるので、component指定はいらなくなる。
     }
   ]
 })
