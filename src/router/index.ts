@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import NotFound from '../views/NotFound.vue'
+import LikesView from '@/views/LikesView.vue'
+import PostsView from '@/views/PostsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,6 +12,40 @@ const router = createRouter({
       // name登録
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/:id',
+      name: 'profile',
+      props: true,
+      children: [
+        {
+          // pathで/から始まらない理由としては、/をつけると/:id/postsではなく、/postsのpathとして認識される。
+          path: 'posts',
+          name: 'posts',
+          /**
+           * 子パースで親パースを上書きする場合には、以下のように作成する。
+           * 親パースを必ず一緒につけなければならない。
+           * つけることで、'/posts/hyoil'にアクセスすると、ちゃんとidにhyoilが入ってくる。
+           * path: '/posts/:id'
+           */
+          component: PostsView
+        },
+        {
+          path: 'likes',
+          name: 'likes',
+          component: LikesView
+        },
+        {
+          /**
+           * defaultとして、表示したい場合にはpathに空欄を入れる。
+           * そうすることで、/:idにアクセスすると以下のcomponentにアクセスすることになる。
+           */
+          path: '',
+          name: 'default',
+          component: '///'
+        }
+      ],
+      component: () => import('../views/ProfileView.vue')
     }
     // {
     //   path: '/about',
