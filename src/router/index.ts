@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import NotFound from '../views/NotFound.vue'
 import LikesView from '@/views/LikesView.vue'
 import PostsView from '@/views/PostsView.vue'
+import SideBarView from '@/views/SideBarView.vue'
+import FooterView from '@/views/FooterView.vue'
+import ProfileView from '../views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +14,12 @@ const router = createRouter({
       path: '/',
       // name登録
       name: 'home',
-      component: HomeView
+      // component: HomeView
+      components: {
+        default: HomeView,
+        SideBar: SideBarView,
+        Footer: FooterView
+      }
     },
     {
       path: '/:id',
@@ -28,12 +36,22 @@ const router = createRouter({
            * つけることで、'/posts/hyoil'にアクセスすると、ちゃんとidにhyoilが入ってくる。
            * path: '/posts/:id'
            */
-          component: PostsView
+          // component: PostsView
+          components: {
+            default: PostsView,
+            SideBar: SideBarView,
+            Footer: FooterView
+          }
         },
         {
           path: 'likes',
           name: 'likes',
-          component: LikesView
+          // component: LikesView
+          components: {
+            default: LikesView,
+            SideBar: SideBarView,
+            Footer: FooterView
+          }
         },
         {
           /**
@@ -46,6 +64,11 @@ const router = createRouter({
         }
       ],
       component: () => import('../views/ProfileView.vue')
+      // components: {
+      //   default: ProfileView,
+      //   SideBar: SideBarView,
+      //   Footer: FooterView
+      // }
     }
     // {
     //   path: '/about',

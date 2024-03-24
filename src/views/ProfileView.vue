@@ -13,4 +13,6 @@ const props = defineProps({
   <RouterLink :to="{ name: 'posts' }">toPosts</RouterLink>
   <RouterLink :to="{ name: 'likes' }">toLikes</RouterLink>
   <RouterView />
+  <RouterView name="SideBar" />
+  <RouterView name="Footer" />
 </template>

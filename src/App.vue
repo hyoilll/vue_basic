@@ -46,6 +46,8 @@ const toAbout = (): void => {
 
   <!-- routerで登録したコンポーネントがRouterViewを通じてブラウザに表示される。 -->
   <RouterView />
+  <RouterView name="SideBar" />
+  <RouterView name="Footer" />
 </template>
 
 <style scoped>
