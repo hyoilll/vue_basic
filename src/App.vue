@@ -14,16 +14,17 @@
 <template>
   <header>Vue Router</header>
   <main>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      |
-      <RouterLink :to="{ name: 'blog', params: { id: 3 } }">Blog</RouterLink>
-    </nav>
     <RouterView v-slot="{ Component, route }">
       <Transition mode="out-in">
         <component :is="Component" :key="route.path" />
       </Transition>
     </RouterView>
+    <p id="blog">title</p>
+    <nav style="margin-top: 1000px">
+      <RouterLink to="/">Home</RouterLink>
+      |
+      <RouterLink :to="{ name: 'blog', params: { id: 3 }, hash: '#blog' }">Blog</RouterLink>
+    </nav>
     <!-- <Transition mode="out-in">
       <RouterView />
     </Transition> -->
