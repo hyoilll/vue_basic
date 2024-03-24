@@ -39,7 +39,7 @@ const router = createRouter({
       // path: '/blog/:id*' + と　？を合わせる
       // name登録
       path: '/blog/:id',
-      alias: '/otherName/:id',
+      alias: '/otherName/:id', // :id引数がついている時には同じようにつけておく。
       name: 'blog',
       component: () => import('../views/BlogView.vue')
     },
@@ -52,9 +52,10 @@ const router = createRouter({
        */
       path: '/:catchAll(.*)*',
       name: 'NotFound',
-      redirect: '/'
+      // redirect: '/'
       // redirect: {name: 'home'}
-      // component: NotFound redirectされるので、component指定はいらなくなる。
+      props: true,
+      component: NotFound
     }
   ]
 })
