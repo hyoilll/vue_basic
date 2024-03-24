@@ -26,26 +26,20 @@ const toAbout = (): void => {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <!-- aタグの代わりにRouterLinkを使うことでリンク間移動時にページリロードを防ぐ。 -->
         <RouterLink to="/">Home</RouterLink>
         <!-- nameを使う場合には必ず:toにしなければならない -->
-        <RouterLink :to="{ name: 'about' }">About</RouterLink>
-        <RouterLink :to="{ path: '/practice', query: { lang: 'ja' }, hash: '#title' }"
-          >Practice</RouterLink
-        >
+        <!-- <RouterLink :to="{ name: 'about' }">About</RouterLink>
+        <RouterLink :to="{ path: '/practice', query: { lang: 'ja' }, hash: '#title' }">Practice</RouterLink> -->
       </nav>
       <!-- scriptに定義する場合 -->
       <!-- <button @click="toAbout">toAbout</button> -->
 
       <!-- templateに定義する場合 -->
       <!-- 以下の$routerはscriptのconst router = useRouter()のrouterと同じObjectになる。 -->
-      <button @click="$router.push('/about')">toAbout</button>
+      <!-- <button @click="$router.push('/about')">toAbout</button> -->
     </div>
   </header>
 
@@ -69,6 +63,7 @@ nav {
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  display: flex;
 }
 
 nav a.router-link-exact-active {
