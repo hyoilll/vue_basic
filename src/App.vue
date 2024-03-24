@@ -1,116 +1,13 @@
-<script setup lang="ts">
-import { RouterLink, RouterView, useRouter } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-
-const router = useRouter()
-
-const toAbout = (): void => {
-  // コードからページを移動させる。
-  /**
-   * push vs replace
-   * push: 前のページを履歴の残すので、前のページに戻ることができる。
-   * replace: 前のページを履歴の残さないため、前のページに戻れずに、二つ前のページに戻ることになる。
-   */
-  router.push('/about')
-  // router.replace('/about')
-
-  /**
-   * go
-   * go: 引数に指定した数字分ページを移動する
-   * ex) go(-1): 一つ前のページに移動
-   *     go(3): 三つ先のページに移動
-   */
-  // router.go(3)
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <!-- aタグの代わりにRouterLinkを使うことでリンク間移動時にページリロードを防ぐ。 -->
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink :to="{ name: 'profile', params: { id: 'hyoil' } }">Profile</RouterLink>
-        <!-- nameを使う場合には必ず:toにしなければならない -->
-        <!-- <RouterLink :to="{ name: 'about' }">About</RouterLink>
-        <RouterLink :to="{ path: '/practice', query: { lang: 'ja' }, hash: '#title' }">Practice</RouterLink> -->
-      </nav>
-      <!-- scriptに定義する場合 -->
-      <!-- <button @click="toAbout">toAbout</button> -->
-
-      <!-- templateに定義する場合 -->
-      <!-- 以下の$routerはscriptのconst router = useRouter()のrouterと同じObjectになる。 -->
-      <!-- <button @click="$router.push('/about')">toAbout</button> -->
-    </div>
-  </header>
-
-  <!-- routerで登録したコンポーネントがRouterViewを通じてブラウザに表示される。 -->
-  <RouterView />
-  <RouterView name="SideBar" />
-  <RouterView name="Footer" />
+  <header>Vue Router</header>
+  <main>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      |
+      <RouterLink :to="{ name: 'blog', params: { id: 3 } }">Blog</RouterLink>
+    </nav>
+    <RouterView />
+  </main>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-  display: flex;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
