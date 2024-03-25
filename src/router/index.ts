@@ -66,4 +66,28 @@ const router = createRouter({
   }
 })
 
+/**
+ * ナビゲーションガード
+ *
+ * beforeEach
+ * ページ移動する前に実行される関数
+ * スクロール関数と同じように移動先と移動元を引数として、受け取ることができる。
+ * 返り値を指定することでページ移動を防ぐことも可能で、特定のページ移動だけ許可することも可能。
+ * 以下のname属性は上にcreateRouterでつけたname属性をさしているよう。
+ */
+router.beforeEach((to, from) => {
+  console.log('beforeEach', to, from)
+
+  // 移動先がblogページだったら、ページ移動を防ぐ
+  // if (to.name === 'blog') return false
+
+  // 移動先がhome場合のみ、ページ移動を許可する。
+  // if (to.name === 'home') return true
+  // else return false
+
+  // redirectさせることも可能
+  // 移動先がblogだったら、homeページにredirectさせる。
+  // if (to.name === 'blog') return { name: 'home' }
+})
+
 export default router
