@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 const props = defineProps({
   id: {
     type: String,
     required: true
   }
+})
+
+/**
+ * 引数やクエリやhashなどが変わる時にだけ実行されるナビゲーションガード
+ * 使い方は他のナビゲーションガードと一緒。
+ *
+ * よって、paramsやhashの変更を検知したい場合には
+ * onBeforeRouteUpdate関数を使っても良いし、propsなどをwatchしても良い
+ */
+onBeforeRouteUpdate(() => {
+  console.log('onBeforeRouteUpdate')
 })
 
 onMounted(() => {
