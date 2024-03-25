@@ -14,9 +14,27 @@ const router = createRouter({
       path: '/blog/:id',
       name: 'blog',
       props: true,
-      component: BlogView
+      component: BlogView,
+      /**
+       * pathごとにナビゲーションガードを設定することも可能。
+       * /blog/:idにアクセスする時にだけ、beforeEnter関数が実行される。
+       * 使い方はbeforeEachと一緒。引数やredirectなど。
+       *
+       * beforeEach VS beforeEnter
+       * beforeEachが優先順位が高い。
+       *
+       * beforeEnter: [function1, function2]
+       * 関数を配列に入れて指定することも可能。
+       * 左から順番で実行される。
+       *
+       * next buttonを押してもbeforeEnterは実行されない。
+       * 同じコンポーネントとして認識されるので、最初だけbeforeEnter関数が呼ばれる。
+       */
+      beforeEnter() {
+        console.log('beforeEnter')
+      }
     }
-  ],
+  ]
   /**
    * route間ページ移動が行われると以下の関数は必ず呼び出されるので、
    * ページ移動時にtopの0pxまで移動することを意味する。
@@ -43,27 +61,27 @@ const router = createRouter({
    * Promiseで2秒後に動作させることで、Transitionと組み合わせてTransitionの2秒間動作が終わるまで、
    * スクロールさせずに、2秒後にスクロールさせる動作を実現させるにはPrommiseを利用すれば便利。
    */
-  scrollBehavior: (to, from, savedPosition) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(to, from, savedPosition)
-        if (savedPosition) {
-          return resolve(savedPosition)
-        }
+  // scrollBehavior: (to, from, savedPosition) => {
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       console.log(to, from, savedPosition)
+  //       if (savedPosition) {
+  //         return resolve(savedPosition)
+  //       }
 
-        if (to.hash) {
-          return resolve({
-            el: to.hash,
-            top: 10
-            // behavior: 'smooth'
-          })
-        }
-        return resolve({
-          top: 0
-        })
-      }, 2000)
-    })
-  }
+  //       if (to.hash) {
+  //         return resolve({
+  //           el: to.hash,
+  //           top: 10
+  //           // behavior: 'smooth'
+  //         })
+  //       }
+  //       return resolve({
+  //         top: 0
+  //       })
+  //     }, 2000)
+  //   })
+  // }
 })
 
 /**
