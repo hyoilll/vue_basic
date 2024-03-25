@@ -108,4 +108,24 @@ router.beforeEach((to, from) => {
   // if (to.name === 'blog') return { name: 'home' }
 })
 
+/**
+ * ページの移動が完了する直前に呼ばれる。
+ * 使い方は他のナビゲーションガードと一緒。
+ */
+router.beforeResolve(() => {
+  console.log('beforeResolve')
+})
+
+/**
+ * ページの移動が終わった後に呼ばれる。
+ * ページの移動が終わった後に実行されるので、return falseしてもページ移動を防ぐことができない。
+ * よって、正確にはナビゲーションガードではない。
+ *
+ * レンダリングの流れとして、afterEachの処理が終わった後に、DOMの更新が行われる。
+ * DOM更新の前に何か行いたい時に使う。
+ */
+router.afterEach(() => {
+  console.log('afterEach')
+})
+
 export default router
