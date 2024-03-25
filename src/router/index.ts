@@ -8,12 +8,15 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta: { transition: 'fade' },
       component: HomeView
     },
     {
       path: '/blog/:id',
       name: 'blog',
       props: true,
+      // meta: { requireAuth: true },
+      meta: { transition: 'slide' },
       component: BlogView,
       /**
        * pathごとにナビゲーションガードを設定することも可能。
@@ -94,15 +97,20 @@ const router = createRouter({
  * 以下のname属性は上にcreateRouterでつけたname属性をさしているよう。
  */
 router.beforeEach((to, from) => {
-  console.log('beforeEach', to, from)
-
+  // console.log('beforeEach', to, from)
+  /**
+   * １。metaの使い方として、移動先ページで認証が求められるかつ、ログインされていない時には'/'にredirectさせる。
+   *
+   * ２。他の使い方として、動的コンポーネントにそれぞれ属性を追加するとき。
+   */
+  // if (to?.meta?.requireAuth && !isLogin) {
+  //   return '/'
+  // }
   // 移動先がblogページだったら、ページ移動を防ぐ
   // if (to.name === 'blog') return false
-
   // 移動先がhome場合のみ、ページ移動を許可する。
   // if (to.name === 'home') return true
   // else return false
-
   // redirectさせることも可能
   // 移動先がblogだったら、homeページにredirectさせる。
   // if (to.name === 'blog') return { name: 'home' }

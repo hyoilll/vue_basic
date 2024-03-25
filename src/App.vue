@@ -20,7 +20,7 @@
       <RouterLink :to="{ name: 'blog', params: { id: 3 }, hash: '#blog' }">Blog</RouterLink>
     </nav>
     <RouterView v-slot="{ Component, route }">
-      <Transition mode="out-in">
+      <Transition :name="route?.meta?.transition" mode="out-in">
         <component :is="Component" :key="route.path" />
       </Transition>
     </RouterView>
@@ -31,13 +31,23 @@
 </template>
 
 <style>
-.v-enter-active,
-.v-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: opacity 0.5s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
