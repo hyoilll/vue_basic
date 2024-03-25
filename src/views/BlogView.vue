@@ -8,36 +8,6 @@ const props = defineProps({
     required: true
   }
 })
-
-/**
- * 引数やクエリやhashなどが変わる時にだけ実行されるナビゲーションガード
- * 使い方は他のナビゲーションガードと一緒。
- *
- * よって、paramsやhashの変更を検知したい場合には
- * onBeforeRouteUpdate関数を使っても良いし、propsなどをwatchしても良い
- */
-onBeforeRouteUpdate(() => {
-  console.log('onBeforeRouteUpdate')
-})
-
-/**
- * 今のコンポーネントから離れる時に呼ばれる。
- * なので、他のナビゲーションガードより一番最初に実行される。
- * 使い方は他のナビゲーションガードと一緒。
- *
- * 本当に今のページから離れますか？と聞くときによく使う関数になる。
- * return window.confirm('本当にこのページから離れますか？')
- */
-onBeforeRouteLeave(() => {
-  console.log('onBeforeRouteLeave')
-})
-
-onMounted(() => {
-  console.log('onMounted')
-})
-onUnmounted(() => {
-  console.log('onUnmounted')
-})
 </script>
 
 <template>
